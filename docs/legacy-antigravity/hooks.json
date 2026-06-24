@@ -1,0 +1,48 @@
+{
+  "everything-agy-hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${pluginPath}/hooks/observe.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash ${pluginPath}/hooks/sync-config.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${pluginPath}/hooks/suggest-compact.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${pluginPath}/hooks/suggest-compact.sh"
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${pluginPath}/hooks/observe.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

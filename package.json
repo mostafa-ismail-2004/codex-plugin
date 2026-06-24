@@ -1,0 +1,19 @@
+{
+  "name": "codex-plugin",
+  "version": "2.1.0",
+  "description": "Agentic development toolkit for Codex with skills, expert personas, hooks, and MCP configuration.",
+  "type": "module",
+  "scripts": {
+    "validate": "python3 scripts/validate-plugin.py .",
+    "watch": "bash scripts/watch.sh",
+    "observer:start": "bash scripts/start-observer.sh start",
+    "observer:status": "bash scripts/start-observer.sh status"
+  },
+  "author": "Mostafa Ismail",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
