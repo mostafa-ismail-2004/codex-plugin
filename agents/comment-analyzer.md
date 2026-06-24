@@ -1,7 +1,7 @@
 ---
 name: comment-analyzer
 description: Analyze code comments for accuracy, completeness, maintainability, and comment rot risk.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 # Comment Analyzer Agent

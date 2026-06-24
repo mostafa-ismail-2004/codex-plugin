@@ -64,7 +64,7 @@ def _check_temporal_order(
 def grade(
     spec: ComplianceSpec,
     trace: list[ObservationEvent],
-    classifier_model: str = "flash",
+    classifier_model: str = "gpt-5.5",
 ) -> ComplianceResult:
     """Grade a trace against a compliance spec using LLM classification."""
     sorted_trace = sorted(trace, key=lambda e: e.timestamp)

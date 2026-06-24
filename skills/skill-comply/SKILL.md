@@ -38,7 +38,7 @@ uv run python -m scripts.skill_comply.run ~/.codex/rules/common/testing.md
 uv run python -m scripts.skill_comply.run --dry-run ~/.codex/skills/search-first/SKILL.md
 
 # Custom models
-uv run python -m scripts.skill_comply.run --gen-model flash --model inherit <path>
+uv run python -m scripts.skill_comply.run --gen-model gpt-5.5 --model inherit <path>
 ```
 
 ## Key Concept: Prompt Independence

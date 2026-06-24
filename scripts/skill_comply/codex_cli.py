@@ -2,14 +2,6 @@
 
 from __future__ import annotations
 
-
-MODEL_ALIASES = {
-    "flash": "gpt-5.5-flash",
-    "flash-8b": "gpt-5.5-flash",
-    "pro": "gpt-5.5-pro",
-}
-
-
 def codex_exec_command(
     prompt: str,
     model: str = "inherit",
@@ -20,9 +12,8 @@ def codex_exec_command(
     """Build a Codex non-interactive command for a prompt."""
     command = ["codex", "exec"]
 
-    resolved_model = MODEL_ALIASES.get(model, model)
-    if resolved_model and resolved_model != "inherit":
-        command.extend(["--model", resolved_model])
+    if model and model != "inherit":
+        command.extend(["--model", model])
 
     if json_output:
         command.append("--json")

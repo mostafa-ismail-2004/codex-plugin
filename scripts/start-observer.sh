@@ -2,7 +2,7 @@
 # Continuous Learning v2 - Observer Agent Launcher
 #
 # Starts the background observer agent that analyzes observations
-# and creates instincts. Uses Flash model for cost efficiency.
+# and creates instincts. Uses gpt-5.5 model.
 #
 # v2.1: Project-scoped — detects current project and analyzes
 #       project-specific observations into project-scoped instincts.

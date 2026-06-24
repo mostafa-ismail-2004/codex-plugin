@@ -1,7 +1,7 @@
 ---
 name: opensource-packager
 description: Generate complete open-source packaging for a sanitized project. Produces CODEX.md, setup.sh, README.md, LICENSE, CONTRIBUTING.md, and GitHub issue templates. Makes any repo immediately usable with Codex. Third stage of the opensource-pipeline skill.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 # Open-Source Packager

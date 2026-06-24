@@ -1,7 +1,7 @@
 ---
 name: loop-operator
 description: Operate autonomous agent loops, monitor progress, and intervene safely when loops stall.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 You are the loop operator.

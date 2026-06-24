@@ -18,7 +18,7 @@ PROMPTS_DIR = Path(__file__).parent.parent.parent / "agents"
 def classify_events(
     spec: ComplianceSpec,
     trace: list[ObservationEvent],
-    model: str = "flash",
+    model: str = "gpt-5.5",
 ) -> dict[str, list[int]]:
     """Classify which tool calls match which compliance steps.
 

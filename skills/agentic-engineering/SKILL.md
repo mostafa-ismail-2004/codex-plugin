@@ -31,8 +31,7 @@ Apply the 15-minute unit rule:
 
 ## Model Routing
 
-- **Flash Tier (e.g., Codex 1.5 Flash)**: classification, boilerplate transforms, narrow edits, high-speed context search.
-- **Pro Tier (e.g., Codex 1.5 Pro, Codex 2.0 Pro)**: implementation, refactors, architecture, complex root-cause analysis, multi-file invariants.
+- **gpt-5.5**: handles all engineering tasks, including classification, boilerplate transforms, narrow edits, implementation, refactors, architecture, complex root-cause analysis, and multi-file invariants.
 
 ## Session Strategy
 

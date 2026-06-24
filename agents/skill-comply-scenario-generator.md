@@ -1,7 +1,7 @@
 ---
 name: skill-comply-scenario-generator
 description: Generates synthetic test scenarios to verify agent behavioral compliance.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 <!-- markdownlint-disable MD007 -->

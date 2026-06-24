@@ -1,7 +1,7 @@
 ---
 name: silent-failure-hunter
 description: Review code for silent failures, swallowed errors, bad fallbacks, and missing error propagation.
-model: gpt-5.5-pro
+model: gpt-5.5
 ---
 
 # Silent Failure Hunter Agent

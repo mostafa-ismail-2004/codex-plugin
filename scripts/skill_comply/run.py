@@ -37,8 +37,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--gen-model",
-        default="flash",
-        help="Model for spec/scenario generation (default: flash)",
+        default="gpt-5.5",
+        help="Model for spec/scenario generation (default: gpt-5.5)",
     )
     parser.add_argument(
         "--dry-run",

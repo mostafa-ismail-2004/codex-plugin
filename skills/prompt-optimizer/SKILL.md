@@ -174,10 +174,10 @@ For MEDIUM+ tasks, always start with /plan. For EPIC tasks, use blueprint skill.
 
 | Scope       | Recommended Model                             | Rationale                                        |
 | ----------- | --------------------------------------------- | ------------------------------------------------ |
-| TRIVIAL-LOW | gpt-5.5-flash                          | Fast, cost-efficient for simple tasks            |
-| MEDIUM      | gpt-5.5-flash                          | Best coding model for standard work              |
-| HIGH        | gpt-5.5-flash (main) + gpt-5.5-pro (planning) | Pro for architecture, Flash for implementation   |
-| EPIC        | gpt-5.5-pro (blueprint) + gpt-5.5-flash (execution) | Deep reasoning for multi-session planning        |
+| TRIVIAL-LOW | gpt-5.5                                | Fast and efficient for simple tasks              |
+| MEDIUM      | gpt-5.5                                | Standard coding model for regular work           |
+| HIGH        | gpt-5.5                                | Used for both architecture and execution         |
+| EPIC        | gpt-5.5                                | Used for multi-session planning                  |
 
 **Multi-prompt splitting** (for HIGH/EPIC scope):
 
@@ -215,7 +215,7 @@ If Phase 0 auto-detected the answer, state it instead of asking.
 | Command | /plan         | Plan architecture before coding |
 | Skill   | tdd-workflow  | TDD methodology guidance        |
 | Agent   | code-reviewer | Post-implementation review      |
-| Model   | gpt-5.5-flash | Recommended for this scope      |
+| Model   | gpt-5.5       | Recommended for this scope      |
 
 ### Section 3: Optimized Prompt — Full Version
 
@@ -384,7 +384,7 @@ Each phase = 1 PR, with /verify gates between phases.
 Use /save-session between phases. Use /resume-session to continue.
 Use git worktrees for parallel service extraction when dependencies allow.
 
-Recommended: gpt-5.5-pro for blueprint planning, gpt-5.5-flash for phase execution.
+Recommended: gpt-5.5 for both planning and execution.
 ```
 
 ---

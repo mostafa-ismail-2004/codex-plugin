@@ -15,7 +15,7 @@ from scripts.skill_comply.scenario_generator import Scenario
 from scripts.skill_comply.codex_cli import codex_exec_command
 
 SANDBOX_BASE = Path("/tmp/skill-comply-sandbox")
-ALLOWED_MODELS = frozenset({"flash", "pro", "flash-8b", "inherit"})
+ALLOWED_MODELS = frozenset({"gpt-5.5", "inherit"})
 
 
 @dataclass(frozen=True)

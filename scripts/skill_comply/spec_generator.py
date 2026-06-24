@@ -17,7 +17,7 @@ PROMPTS_DIR = Path(__file__).parent.parent.parent / "agents"
 
 def generate_spec(
     skill_path: Path,
-    model: str = "flash",
+    model: str = "gpt-5.5",
     max_retries: int = 2,
 ) -> ComplianceSpec:
     """Generate a compliance spec from a skill/rule file.

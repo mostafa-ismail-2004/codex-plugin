@@ -35,7 +35,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 ```
                     ┌─────────────┐
                     │   PLANNER   │
-                    │  (gpt-5.5-pro) │
+                    │   (gpt-5.5)    │
                     └──────┬──────┘
                            │ Product Spec
                            │ (features, sprints, design direction)
@@ -47,14 +47,14 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
               │                        │
               │  ┌──────────┐          │
               │  │GENERATOR │--build-->│──┐
-              │  │(3.1-pro) │          │  │
+              │  │(gpt-5.5) │          │  │
               │  └────▲─────┘          │  │
               │       │                │  │ live app
               │    feedback             │  │
               │       │                │  │
               │  ┌────┴─────┐          │  │
               │  │EVALUATOR │<-test----│──┘
-              │  │(3.1-pro) │          │
+              │  │(gpt-5.5) │          │
               │  │+Playwright│         │
               │  └──────────┘          │
               │                        │
@@ -75,7 +75,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Is deliberately **ambitious** — conservative planning leads to underwhelming results
 - Produces evaluation criteria that the Evaluator will use later
 
-**Model:** gpt-5.5-pro (needs deep reasoning for spec expansion)
+**Model:** gpt-5.5 (needs deep reasoning for spec expansion)
 
 ### 2. Generator Agent
 
@@ -89,7 +89,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Manages git for version control between iterations
 - Reads Evaluator feedback and incorporates it in next iteration
 
-**Model:** gpt-5.5-pro (needs strong coding capability)
+**Model:** gpt-5.5 (needs strong coding capability)
 
 ### 3. Evaluator Agent
 
@@ -107,7 +107,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Returns structured feedback with scores and specific issues
 - Is engineered to be **ruthlessly strict** — never praises mediocre work
 
-**Model:** gpt-5.5-pro (needs strong judgment + tool use)
+**Model:** gpt-5.5 (needs strong judgment + tool use)
 
 ## Evaluation Criteria
 
@@ -183,16 +183,16 @@ GAN_EVAL_CRITERIA="functionality,performance,security" \
 
 ```bash
 # Step 1: Plan
-codex exec --model gpt-5.5-pro "You are a Product Planner. Read PLANNER_PROMPT.md. Expand this brief into a full product spec: 'Build a Kanban board app'. Write spec to spec.md"
+codex exec --model gpt-5.5 "You are a Product Planner. Read PLANNER_PROMPT.md. Expand this brief into a full product spec: 'Build a Kanban board app'. Write spec to spec.md"
 
 # Step 2: Generate (iteration 1)
-codex exec --model gpt-5.5-pro "You are a Generator. Read spec.md. Implement Sprint 1. Start the dev server on port 3000."
+codex exec --model gpt-5.5 "You are a Generator. Read spec.md. Implement Sprint 1. Start the dev server on port 3000."
 
 # Step 3: Evaluate (iteration 1)
-codex exec --model gpt-5.5-pro "You are an Evaluator. Read EVALUATOR_PROMPT.md. Test the live app at http://localhost:3000. Score against the rubric. Write feedback to feedback-001.md"
+codex exec --model gpt-5.5 "You are an Evaluator. Read EVALUATOR_PROMPT.md. Test the live app at http://localhost:3000. Score against the rubric. Write feedback to feedback-001.md"
 
 # Step 4: Generate (iteration 2 — reads feedback)
-codex exec --model gpt-5.5-pro "You are a Generator. Read spec.md and feedback-001.md. Address all issues. Improve the scores."
+codex exec --model gpt-5.5 "You are a Generator. Read spec.md and feedback-001.md. Address all issues. Improve the scores."
 
 # Repeat steps 3-4 until pass threshold met
 ```
@@ -201,21 +201,21 @@ codex exec --model gpt-5.5-pro "You are a Generator. Read spec.md and feedback-0
 
 The harness should simplify as models improve. Following the industry evolution:
 
-### Stage 1 — Weaker Models (Flash-class)
+### Stage 1 — Weaker Models
 
 - Full sprint decomposition required
 - Context resets between sprints (avoid context anxiety)
 - 2-agent minimum: Initializer + Coding Agent
 - Heavy scaffolding compensates for model limitations
 
-### Stage 2 — Capable Models (Pro-class)
+### Stage 2 — Capable Models
 
 - Full 3-agent harness: Planner + Generator + Evaluator
 - Sprint contracts before each implementation phase
 - 10-sprint decomposition for complex apps
 - Context resets still useful but less critical
 
-### Stage 3 — Frontier Models (Next-gen Pro-class)
+### Stage 3 — Frontier Models
 
 - Simplified harness: single planning pass, continuous generation
 - Evaluation reduced to single end-pass (model is smarter)
@@ -232,9 +232,9 @@ The harness should simplify as models improve. Following the industry evolution:
 | --------------------- | ---------------------------------------- | ------------------------------------------ |
 | `GAN_MAX_ITERATIONS`  | `15`                                     | Maximum generator-evaluator cycles         |
 | `GAN_PASS_THRESHOLD`  | `7.0`                                    | Weighted score to pass (1-10)              |
-| `GAN_PLANNER_MODEL`   | `gpt-5.5-pro`                         | Model for planning agent                   |
-| `GAN_GENERATOR_MODEL` | `gpt-5.5-pro`                         | Model for generator agent                  |
-| `GAN_EVALUATOR_MODEL` | `gpt-5.5-pro`                         | Model for evaluator agent                  |
+| `GAN_PLANNER_MODEL`   | `gpt-5.5`                             | Model for planning agent                   |
+| `GAN_GENERATOR_MODEL` | `gpt-5.5`                             | Model for generator agent                  |
+| `GAN_EVALUATOR_MODEL` | `gpt-5.5`                             | Model for evaluator agent                  |
 | `GAN_EVAL_CRITERIA`   | `design,originality,craft,functionality` | Comma-separated criteria                   |
 | `GAN_DEV_SERVER_PORT` | `3000`                                   | Port for the live app                      |
 | `GAN_DEV_SERVER_CMD`  | `npm run dev`                            | Command to start dev server                |

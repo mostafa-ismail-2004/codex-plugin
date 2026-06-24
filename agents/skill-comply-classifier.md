@@ -1,7 +1,7 @@
 ---
 name: skill-comply-classifier
 description: Classifies tool calls against behavioral steps for skill compliance monitoring.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 You are classifying tool calls from a coding agent session against expected behavioral steps.

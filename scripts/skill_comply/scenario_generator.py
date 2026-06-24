@@ -27,7 +27,7 @@ class Scenario:
 def generate_scenarios(
     skill_path: Path,
     spec_yaml: str,
-    model: str = "flash",
+    model: str = "gpt-5.5",
 ) -> list[Scenario]:
     """Generate 3 scenarios with decreasing prompt strictness.
 

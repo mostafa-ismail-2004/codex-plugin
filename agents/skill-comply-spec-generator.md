@@ -1,7 +1,7 @@
 ---
 name: skill-comply-spec-generator
 description: Extracts observable behavioral sequences from natural language skill definitions.
-model: gpt-5.5-flash
+model: gpt-5.5
 ---
 
 <!-- markdownlint-disable MD007 -->
