@@ -1,7 +1,6 @@
 ---
 name: team-builder
 description: Interactive agent picker for composing and dispatching parallel teams
-origin: EGC
 ---
 
 # Team Builder
@@ -142,7 +141,7 @@ If only 1 agent was selected, skip synthesis and present the output directly.
 ```
 User: team builder
 
-Gemini:
+Codex:
 Available agent domains:
 1. Engineering (2) — Software Architect, Security Engineer
 2. Marketing (1) — SEO Specialist
@@ -153,7 +152,7 @@ Pick domains or name specific agents:
 
 User: security + seo
 
-Gemini:
+Codex:
 Selected: Security Engineer + SEO Specialist
 What should they work on?
 
@@ -161,7 +160,7 @@ User: Review my Next.js e-commerce site before launch
 
 [Both agents spawn in parallel, each applying their specialty to the codebase]
 
-Gemini:
+Codex:
 ## Security Engineer Findings
 - [findings...]
 

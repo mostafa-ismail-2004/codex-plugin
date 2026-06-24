@@ -1,19 +1,18 @@
 ---
 name: codebase-onboarding
-description: Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map, key entry points, conventions, and a starter GEMINI.md. Use when joining a new project or setting up Gemini CLI for the first time in a repo.
-origin: EGC
+description: Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map, key entry points, conventions, and a starter CODEX.md. Use when joining a new project or setting up Codex for the first time in a repo.
 ---
 
 # Codebase Onboarding
 
-Systematically analyze an unfamiliar codebase and produce a structured onboarding guide. Designed for developers joining a new project or setting up GEMINI CLI for the first time.
+Systematically analyze an unfamiliar codebase and produce a structured onboarding guide. Designed for developers joining a new project or setting up Codex for the first time.
 
 ## When to Use
 
-- First time opening a project with Gemini CLI
+- First time opening a project with Codex
 - Joining a new team or repository
 - User asks "help me understand this codebase"
-- User asks to generate a GEMINI.md for a project
+- User asks to generate a CODEX.md for a project
 - User says "onboard me" or "walk me through this repo"
 
 ## How It Works
@@ -187,9 +186,9 @@ Produce two outputs:
 | Change build config  | `next.config.ts`                  |
 ```
 
-#### Output 2: Starter GEMINI.md
+#### Output 2: Starter CODEX.md
 
-Generate or update a project-specific GEMINI.md based on detected conventions. If `GEMINI.md` already exists, read it first and enhance it — preserve existing project-specific instructions and clearly call out what was added or changed.
+Generate or update a project-specific CODEX.md based on detected conventions. If `CODEX.md` already exists, read it first and enhance it — preserve existing project-specific instructions and clearly call out what was added or changed.
 
 ```markdown
 # Project Instructions
@@ -230,13 +229,13 @@ Generate or update a project-specific GEMINI.md based on detected conventions. I
 
 1. **Don't read everything** — reconnaissance should use Glob and Grep, not Read on every file. Read selectively only for ambiguous signals.
 2. **Verify, don't guess** — if a framework is detected from config but the actual code uses something different, trust the code.
-3. **Respect existing GEMINI.md** — if one already exists, enhance it rather than replacing it. Call out what's new vs existing.
+3. **Respect existing CODEX.md** — if one already exists, enhance it rather than replacing it. Call out what's new vs existing.
 4. **Stay concise** — the onboarding guide should be scannable in 2 minutes. Details belong in the code, not the guide.
 5. **Flag unknowns** — if a convention can't be confidently detected, say so rather than guessing. "Could not determine test runner" is better than a wrong answer.
 
 ## Anti-Patterns to Avoid
 
-- Generating a GEMINI.md that's longer than 100 lines — keep it focused
+- Generating a CODEX.md that's longer than 100 lines — keep it focused
 - Listing every dependency — highlight only the ones that shape how you write code
 - Describing obvious directory names — `src/` doesn't need an explanation
 - Copying the README — the onboarding guide adds structural insight the README lacks
@@ -246,17 +245,17 @@ Generate or update a project-specific GEMINI.md based on detected conventions. I
 ### Example 1: First time in a new repo
 
 **User**: "Onboard me to this codebase"
-**Action**: Run full 4-phase workflow → produce Onboarding Guide + Starter GEMINI.md
-**Output**: Onboarding Guide printed directly to the conversation, plus a `GEMINI.md` written to the project root
+**Action**: Run full 4-phase workflow → produce Onboarding Guide + Starter CODEX.md
+**Output**: Onboarding Guide printed directly to the conversation, plus a `CODEX.md` written to the project root
 
-### Example 2: Generate GEMINI.md for existing project
+### Example 2: Generate CODEX.md for existing project
 
-**User**: "Generate a GEMINI.md for this project"
-**Action**: Run Phases 1-3, skip Onboarding Guide, produce only GEMINI.md
-**Output**: Project-specific `GEMINI.md` with detected conventions
+**User**: "Generate a CODEX.md for this project"
+**Action**: Run Phases 1-3, skip Onboarding Guide, produce only CODEX.md
+**Output**: Project-specific `CODEX.md` with detected conventions
 
-### Example 3: Enhance existing GEMINI.md
+### Example 3: Enhance existing CODEX.md
 
-**User**: "Update the GEMINI.md with current project conventions"
-**Action**: Read existing GEMINI.md, run Phases 1-3, merge new findings
-**Output**: Updated `GEMINI.md` with additions clearly marked
+**User**: "Update the CODEX.md with current project conventions"
+**Action**: Read existing CODEX.md, run Phases 1-3, merge new findings
+**Output**: Updated `CODEX.md` with additions clearly marked

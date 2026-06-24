@@ -19,7 +19,7 @@
   "interface": {
     "displayName": "Codex Plugin",
     "shortDescription": "A broad Codex toolkit for agentic engineering workflows.",
-    "longDescription": "Codex Plugin migrates Everything Antigravity into a Codex-native plugin package with reusable skills, expert persona prompts, lifecycle hooks, and development utilities.",
+    "longDescription": "Codex Plugin is a Codex-native plugin package that equips your environment with reusable skills, expert persona prompts, lifecycle hooks, and development utilities.",
     "developerName": "Mostafa Ismail",
     "category": "Productivity",
     "capabilities": [

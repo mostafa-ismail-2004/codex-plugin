@@ -1,7 +1,6 @@
 ---
 name: nodejs-keccak256
 description: Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation.
-origin: EGC
 ---
 
 # Node.js Keccak-256

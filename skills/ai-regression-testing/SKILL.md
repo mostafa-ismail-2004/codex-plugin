@@ -1,7 +1,6 @@
 ---
 name: ai-regression-testing
 description: Regression testing strategies for AI-assisted development. Sandbox-mode API testing without database dependencies, automated bug-check workflows, and patterns to catch AI blind spots where the same model writes and reviews code.
-origin: EGC
 ---
 
 # AI Regression Testing
@@ -10,7 +9,7 @@ Testing patterns specifically designed for AI-assisted development, where the sa
 
 ## When to Activate
 
-- AI agent (Gemini CLI, Cursor, Codex) has modified API routes or backend logic
+- AI agent (Codex, Cursor, Codex) has modified API routes or backend logic
 - A bug was found and fixed — need to prevent re-introduction
 - Project has a sandbox/mock mode that can be leveraged for DB-free testing
 - Running `/bug-check` or similar review commands after code changes
@@ -201,7 +200,7 @@ describe("GET /api/user/messages (conversation list)", () => {
 ### Custom Command Definition
 
 ```markdown
-<!-- .gemini/commands/bug-check.md -->
+<!-- .codex/commands/bug-check.md -->
 
 # Bug Check
 

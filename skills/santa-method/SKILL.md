@@ -1,7 +1,7 @@
 ---
 name: santa-method
 description: "Multi-agent adversarial verification with convergence loop. Two independent review agents must both pass before output ships."
-origin: "EGC"
+origin: "Codex"
 ---
 
 # Santa Method
@@ -116,7 +116,7 @@ Be rigorous. Your job is to find problems, not to approve.
 ```
 
 ```python
-# Spawn reviewers in parallel (Gemini CLI subagents)
+# Spawn reviewers in parallel (Codex subagents)
 review_b = Agent(prompt=REVIEWER_PROMPT.format(...), description="Santa Reviewer B")
 review_c = Agent(prompt=REVIEWER_PROMPT.format(...), description="Santa Reviewer C")
 
@@ -208,12 +208,12 @@ Critical: each review round uses **fresh agents**. Reviewers must not carry memo
 
 ## Implementation Patterns
 
-### Pattern A: Gemini CLI Subagents (Recommended)
+### Pattern A: Codex Subagents (Recommended)
 
 Subagents provide true context isolation. Each reviewer is a separate process with no shared state.
 
 ```bash
-# In a Gemini CLI session, use the Agent tool to spawn reviewers
+# In a Codex session, use the Agent tool to spawn reviewers
 # Both agents run in parallel for speed
 ```
 

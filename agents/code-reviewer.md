@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code. MUST BE USED for all code changes.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 You are a senior code reviewer ensuring high standards of code quality and security.
@@ -217,7 +217,7 @@ Verdict: WARNING — 2 HIGH issues should be resolved before merge.
 
 ## Project-Specific Guidelines
 
-When available, also check project-specific conventions from `GEMINI.md` or project rules:
+When available, also check project-specific conventions from `CODEX.md` or project rules:
 
 - File size limits (e.g., 200-400 lines typical, 800 max)
 - Emoji policy (many projects prohibit emojis in code)

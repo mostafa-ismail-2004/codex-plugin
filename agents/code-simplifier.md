@@ -1,7 +1,7 @@
 ---
 name: code-simplifier
 description: Simplifies and refines code for clarity, consistency, and maintainability while preserving behavior. Focus on recently modified code unless instructed otherwise.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 # Code Simplifier Agent

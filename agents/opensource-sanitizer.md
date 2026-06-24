@@ -1,7 +1,7 @@
 ---
 name: opensource-sanitizer
 description: Verify an open-source fork is fully sanitized before release. Scans for leaked secrets, PII, internal references, and dangerous files using 20+ regex patterns. Generates a PASS/FAIL/PASS-WITH-WARNINGS report. Second stage of the opensource-pipeline skill. Use PROACTIVELY before any public release.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 # Open-Source Sanitizer
@@ -102,7 +102,7 @@ Verify these do NOT exist:
 *.pem, *.key, *.p12, *.pfx, *.jks
 credentials.json, service-account*.json
 .secrets/, secrets/
-.gemini/settings.json
+.codex/settings.json
 sessions/
 *.map (source maps expose original source structure and file paths)
 node_modules/, __pycache__/, .venv/, venv/

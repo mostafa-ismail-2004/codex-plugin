@@ -10,7 +10,6 @@ description: >-
   complex multi-PR task, or describes work that needs multiple sessions.
   DO NOT TRIGGER when: task is completable in a single PR or fewer
   than 3 tool calls, or user says "just do it".
-origin: EGC
 ---
 
 # Blueprint — Construction Plan Generator
@@ -94,11 +93,11 @@ git checkout <reviewed-full-sha>          # pin to a specific reviewed commit
 
 ### Vendored standalone install
 
-If you are vendoring only this skill outside the full EGC install, copy the reviewed file from the EGC repository into `~/.gemini/skills/blueprint/SKILL.md`. Vendored copies do not have a git remote, so update them by re-copying the file from a reviewed EGC commit rather than running `git pull`.
+If you are vendoring only this skill outside the full Codex install, copy the reviewed file from the Codex repository into `~/.codex/skills/blueprint/SKILL.md`. Vendored copies do not have a git remote, so update them by re-copying the file from a reviewed Codex commit rather than running `git pull`.
 
 ## Requirements
 
-- Gemini CLI (for `/blueprint` slash command)
+- Codex (for `/blueprint` slash command)
 - Git + GitHub CLI (optional — enables full branch/PR/CI workflow; Blueprint detects absence and auto-switches to direct mode)
 
 ## Source

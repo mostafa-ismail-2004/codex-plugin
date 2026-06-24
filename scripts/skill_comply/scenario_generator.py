@@ -9,6 +9,7 @@ from pathlib import Path
 import yaml
 
 from scripts.skill_comply.utils import extract_yaml
+from scripts.skill_comply.codex_cli import codex_exec_command
 
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "agents"
 
@@ -30,7 +31,7 @@ def generate_scenarios(
 ) -> list[Scenario]:
     """Generate 3 scenarios with decreasing prompt strictness.
 
-    Calls gemini -p with the scenario_generator prompt, parses YAML output.
+    Calls codex exec with the scenario_generator prompt, parses YAML output.
     """
     skill_content = skill_path.read_text()
     prompt_template = (PROMPTS_DIR / "skill-comply-scenario-generator.md").read_text()
@@ -41,17 +42,17 @@ def generate_scenarios(
     )
 
     result = subprocess.run(
-        ["gemini", "-p", prompt, "--model", model, "--output-format", "text"],
+        codex_exec_command(prompt, model),
         capture_output=True,
         text=True,
         timeout=120,
     )
 
     if result.returncode != 0:
-        raise RuntimeError(f"gemini -p failed: {result.stderr}")
+        raise RuntimeError(f"codex exec failed: {result.stderr}")
 
     if not result.stdout.strip():
-        raise RuntimeError("gemini -p returned empty output")
+        raise RuntimeError("codex exec returned empty output")
 
     raw_yaml = extract_yaml(result.stdout)
     parsed = yaml.safe_load(raw_yaml)

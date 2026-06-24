@@ -1,7 +1,6 @@
 ---
 name: skill-comply
 description: Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines
-origin: EGC
 tools: Read, Bash
 ---
 
@@ -11,7 +10,7 @@ Measures whether coding agents actually follow skills, rules, or agent definitio
 
 1. Auto-generating expected behavioral sequences (specs) from any .md file
 2. Auto-generating scenarios with decreasing prompt strictness (supportive → neutral → competing)
-3. Running `gemini -p` and capturing tool call traces via stream-json
+3. Running `codex exec` and capturing tool call traces via JSONL
 4. Classifying tool calls against spec steps using LLM (not regex)
 5. Checking temporal ordering deterministically
 6. Generating self-contained reports with spec, prompts, and timelines
@@ -33,10 +32,10 @@ Measures whether coding agents actually follow skills, rules, or agent definitio
 
 ```bash
 # Full run
-uv run python -m scripts.skill_comply.run ~/.gemini/rules/common/testing.md
+uv run python -m scripts.skill_comply.run ~/.codex/rules/common/testing.md
 
 # Dry run (no cost, spec + scenarios only)
-uv run python -m scripts.skill_comply.run --dry-run ~/.gemini/skills/search-first/SKILL.md
+uv run python -m scripts.skill_comply.run --dry-run ~/.codex/skills/search-first/SKILL.md
 
 # Custom models
 uv run python -m scripts.skill_comply.run --gen-model flash --model inherit <path>

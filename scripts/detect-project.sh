@@ -55,8 +55,8 @@ _clv2_detect_project() {
   local project_id=""
   local source_hint=""
 
-  # 1. Try CODEX_PLUGIN_PROJECT_DIR env var, with legacy fallback.
-  _configured_project_dir="${CODEX_PLUGIN_PROJECT_DIR:-${ANTIGRAVITY_PROJECT_DIR:-}}"
+  # 1. Try CODEX_PLUGIN_PROJECT_DIR env var.
+  _configured_project_dir="${CODEX_PLUGIN_PROJECT_DIR:-}"
   if [ -n "$_configured_project_dir" ] && [ -d "$_configured_project_dir" ]; then
     project_root="$_configured_project_dir"
     source_hint="env"

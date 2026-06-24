@@ -22,7 +22,7 @@ rsync -av --delete \
   --exclude '.git' \
   --exclude 'node_modules' \
   --exclude '.env' \
-  --exclude '.antigravitycli' \
+  --exclude '.codexcli' \
   --exclude '.codex-plugin/local-cache' \
   ./ "${TARGET_DIR}/"
 
@@ -34,4 +34,4 @@ nodemon --watch . \
   --ext json,js,ts,sh,md \
   --ignore node_modules \
   --ignore .git \
-  --exec "rsync -av --delete --exclude '.git' --exclude 'node_modules' --exclude '.env' --exclude '.antigravitycli' --exclude '.codex-plugin/local-cache' . ${TARGET_DIR}/"
+  --exec "rsync -av --delete --exclude '.git' --exclude 'node_modules' --exclude '.env' --exclude '.codexcli' --exclude '.codex-plugin/local-cache' . ${TARGET_DIR}/"

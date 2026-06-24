@@ -1,18 +1,17 @@
 ---
 name: agent-sort
-description: Build an evidence-backed EGC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when EGC should be trimmed to what a project actually needs instead of loading the full bundle.
-origin: EGC
+description: Build an evidence-backed Codex install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when Codex should be trimmed to what a project actually needs instead of loading the full bundle.
 ---
 
 # Agent Sort
 
-Use this skill when a repo needs a project-specific EGC surface instead of the default full install.
+Use this skill when a repo needs a project-specific Codex surface instead of the default full install.
 
-The goal is not to guess what "feels useful." The goal is to classify EGC components with evidence from the actual codebase.
+The goal is not to guess what "feels useful." The goal is to classify Codex components with evidence from the actual codebase.
 
 ## When to Use
 
-- A project only needs a subset of EGC and full installs are too noisy
+- A project only needs a subset of Codex and full installs are too noisy
 - The repo stack is clear, but nobody wants to hand-curate skills one by one
 - A team wants a repeatable install decision backed by grep evidence instead of opinion
 - You need to separate always-loaded daily workflow surfaces from searchable library/reference surfaces
@@ -24,7 +23,7 @@ The goal is not to guess what "feels useful." The goal is to classify EGC compon
 - Every DAILY decision must cite concrete repo evidence
 - LIBRARY does not mean "delete"; it means "keep accessible without loading by default"
 - Do not install hooks, rules, or scripts that the current repo cannot use
-- Prefer EGC-native surfaces; do not introduce a second install system
+- Prefer Codex-native surfaces; do not introduce a second install system
 
 ## Outputs
 
@@ -141,7 +140,7 @@ Demote to `LIBRARY` when:
 
 Translate the classification into action:
 
-- DAILY skills -> install or keep in `.gemini/skills/`
+- DAILY skills -> install or keep in `.codex/skills/`
 - DAILY commands -> keep as explicit shims only if still useful
 - DAILY rules -> install only matching language sets
 - DAILY hooks/scripts -> keep only compatible ones
@@ -153,7 +152,7 @@ If the repo already uses selective installs, update that plan instead of creatin
 
 If the project wants a searchable library surface, create:
 
-- `.gemini/skills/skill-library/SKILL.md`
+- `.codex/skills/skill-library/SKILL.md`
 
 That router should contain:
 
@@ -183,7 +182,7 @@ Return a compact report with:
 
 If the next step is interactive installation or repair, hand off to:
 
-- `configure-EGC`
+- `configure-Codex`
 
 If the next step is overlap cleanup or catalog review, hand off to:
 

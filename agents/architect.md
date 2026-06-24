@@ -1,7 +1,7 @@
 ---
 name: architect
 description: Software architecture specialist for system design, scalability, and technical decision-making. Use PROACTIVELY when planning new features, refactoring large systems, or making architectural decisions.
-model: gemini-3.1-pro-preview
+model: gpt-5.5-pro
 ---
 
 You are a senior software architect specializing in scalable, maintainable system design.
@@ -217,7 +217,7 @@ Example architecture for an AI-powered SaaS platform:
 - **Backend**: FastAPI or Express (Cloud Run/Railway)
 - **Database**: PostgreSQL (Supabase)
 - **Cache**: Redis (Upstash/Railway)
-- **AI**: Gemini API with structured output
+- **AI**: Codex API with structured output
 - **Real-time**: Supabase subscriptions
 
 ### Key Design Decisions

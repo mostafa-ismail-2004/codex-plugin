@@ -1,7 +1,6 @@
 ---
 name: gan-style-harness
 description: "GAN-inspired Generator-Evaluator agent harness for building high-quality applications autonomously. Based on harness design research for long-running application development."
-origin: EGC
 ---
 
 # GAN-Style Harness Skill
@@ -26,7 +25,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 
 ## When NOT to Use
 
-- Quick single-file fixes (use standard `gemini -p`)
+- Quick single-file fixes (use standard `codex exec`)
 - Tasks with tight budget constraints (<$10)
 - Simple refactoring (use de-sloppify pattern instead)
 - Tasks that are already well-specified with tests (use TDD workflow)
@@ -36,7 +35,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 ```
                     ┌─────────────┐
                     │   PLANNER   │
-                    │  (gemini-3.1-pro-preview) │
+                    │  (gpt-5.5-pro) │
                     └──────┬──────┘
                            │ Product Spec
                            │ (features, sprints, design direction)
@@ -76,7 +75,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Is deliberately **ambitious** — conservative planning leads to underwhelming results
 - Produces evaluation criteria that the Evaluator will use later
 
-**Model:** gemini-3.1-pro-preview (needs deep reasoning for spec expansion)
+**Model:** gpt-5.5-pro (needs deep reasoning for spec expansion)
 
 ### 2. Generator Agent
 
@@ -90,7 +89,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Manages git for version control between iterations
 - Reads Evaluator feedback and incorporates it in next iteration
 
-**Model:** gemini-3.1-pro-preview (needs strong coding capability)
+**Model:** gpt-5.5-pro (needs strong coding capability)
 
 ### 3. Evaluator Agent
 
@@ -108,7 +107,7 @@ This is the same dynamic as GANs (Generative Adversarial Networks): the Generato
 - Returns structured feedback with scores and specific issues
 - Is engineered to be **ruthlessly strict** — never praises mediocre work
 
-**Model:** gemini-3.1-pro-preview (needs strong judgment + tool use)
+**Model:** gpt-5.5-pro (needs strong judgment + tool use)
 
 ## Evaluation Criteria
 
@@ -180,20 +179,20 @@ GAN_EVAL_CRITERIA="functionality,performance,security" \
 ./scripts/gan-harness.sh "Build a REST API for task management"
 ```
 
-### Via Gemini CLI (Manual)
+### Via Codex (Manual)
 
 ```bash
 # Step 1: Plan
-gemini -p --model gemini-3.1-pro-preview "You are a Product Planner. Read PLANNER_PROMPT.md. Expand this brief into a full product spec: 'Build a Kanban board app'. Write spec to spec.md"
+codex exec --model gpt-5.5-pro "You are a Product Planner. Read PLANNER_PROMPT.md. Expand this brief into a full product spec: 'Build a Kanban board app'. Write spec to spec.md"
 
 # Step 2: Generate (iteration 1)
-gemini -p --model gemini-3.1-pro-preview "You are a Generator. Read spec.md. Implement Sprint 1. Start the dev server on port 3000."
+codex exec --model gpt-5.5-pro "You are a Generator. Read spec.md. Implement Sprint 1. Start the dev server on port 3000."
 
 # Step 3: Evaluate (iteration 1)
-gemini -p --model gemini-3.1-pro-preview --allowedTools "Read,Bash,mcp__playwright__*" "You are an Evaluator. Read EVALUATOR_PROMPT.md. Test the live app at http://localhost:3000. Score against the rubric. Write feedback to feedback-001.md"
+codex exec --model gpt-5.5-pro "You are an Evaluator. Read EVALUATOR_PROMPT.md. Test the live app at http://localhost:3000. Score against the rubric. Write feedback to feedback-001.md"
 
 # Step 4: Generate (iteration 2 — reads feedback)
-gemini -p --model gemini-3.1-pro-preview "You are a Generator. Read spec.md and feedback-001.md. Address all issues. Improve the scores."
+codex exec --model gpt-5.5-pro "You are a Generator. Read spec.md and feedback-001.md. Address all issues. Improve the scores."
 
 # Repeat steps 3-4 until pass threshold met
 ```
@@ -233,9 +232,9 @@ The harness should simplify as models improve. Following the industry evolution:
 | --------------------- | ---------------------------------------- | ------------------------------------------ |
 | `GAN_MAX_ITERATIONS`  | `15`                                     | Maximum generator-evaluator cycles         |
 | `GAN_PASS_THRESHOLD`  | `7.0`                                    | Weighted score to pass (1-10)              |
-| `GAN_PLANNER_MODEL`   | `gemini-3.1-pro-preview`                         | Model for planning agent                   |
-| `GAN_GENERATOR_MODEL` | `gemini-3.1-pro-preview`                         | Model for generator agent                  |
-| `GAN_EVALUATOR_MODEL` | `gemini-3.1-pro-preview`                         | Model for evaluator agent                  |
+| `GAN_PLANNER_MODEL`   | `gpt-5.5-pro`                         | Model for planning agent                   |
+| `GAN_GENERATOR_MODEL` | `gpt-5.5-pro`                         | Model for generator agent                  |
+| `GAN_EVALUATOR_MODEL` | `gpt-5.5-pro`                         | Model for evaluator agent                  |
 | `GAN_EVAL_CRITERIA`   | `design,originality,craft,functionality` | Comma-separated criteria                   |
 | `GAN_DEV_SERVER_PORT` | `3000`                                   | Port for the live app                      |
 | `GAN_DEV_SERVER_CMD`  | `npm run dev`                            | Command to start dev server                |

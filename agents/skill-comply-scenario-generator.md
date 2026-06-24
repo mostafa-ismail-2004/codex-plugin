@@ -1,7 +1,7 @@
 ---
 name: skill-comply-scenario-generator
 description: Generates synthetic test scenarios to verify agent behavioral compliance.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 <!-- markdownlint-disable MD007 -->
@@ -22,7 +22,7 @@ scenarios:
   level_name: supportive
   description: <what this scenario tests>
   prompt: |
-  <the task prompt to pass to gemini -p. Must be a concrete coding task.>
+  <the task prompt to pass to codex exec. Must be a concrete coding task.>
   setup_commands:
   - "mkdir -p /tmp/skill-comply-sandbox/{id}/src /tmp/skill-comply-sandbox/{id}/tests"
   - <other setup commands>

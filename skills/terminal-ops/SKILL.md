@@ -1,7 +1,6 @@
 ---
 name: terminal-ops
-description: Evidence-first repo execution workflow for EGC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.
-origin: EGC
+description: Evidence-first repo execution workflow for Codex. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.
 ---
 
 # Terminal Ops
@@ -12,7 +11,7 @@ This skill is intentionally narrower than general coding guidance. It is an oper
 
 ## Skill Stack
 
-Pull these EGC-native skills into the workflow when relevant:
+Pull these Codex-native skills into the workflow when relevant:
 
 - `verification-loop` for exact proving steps after changes
 - `tdd-workflow` when the right fix needs regression coverage

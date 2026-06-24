@@ -1,12 +1,11 @@
 ---
 name: verification-loop
-description: "A comprehensive verification system for Gemini CLI sessions."
-origin: EGC
+description: "A comprehensive verification system for Codex sessions."
 ---
 
 # Verification Loop Skill
 
-A comprehensive verification system for Gemini CLI sessions.
+A comprehensive verification system for Codex sessions.
 
 ## When to Use
 

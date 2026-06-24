@@ -1,7 +1,7 @@
 ---
 name: prompt-optimizer
 description: >-
-  Analyze raw prompts, identify intent and gaps, match EGC components
+  Analyze raw prompts, identify intent and gaps, match Codex components
   (skills/commands/agents/hooks), and output a ready-to-paste optimized
   prompt. Advisory role only — never executes the task itself.
   TRIGGER when: user says "optimize prompt", "improve my prompt",
@@ -12,30 +12,29 @@ description: >-
   "just do it" / "直接做". DO NOT TRIGGER when user says "优化代码",
   "优化性能", "optimize performance", "optimize this code" — those are
   refactoring/performance tasks, not prompt optimization.
-origin: EGC
 ---
 
 # Prompt Optimizer
 
-Analyze a draft prompt, critique it, match it to EGC ecosystem components,
+Analyze a draft prompt, critique it, match it to Codex ecosystem components,
 and output a complete optimized prompt the user can paste and run.
 
 ## When to Use
 
 - User says "optimize this prompt", "improve my prompt", "rewrite this prompt"
 - User says "help me write a better prompt for..."
-- User says "what's the best way to ask Gemini CLI to..."
+- User says "what's the best way to ask Codex to..."
 - User says "优化prompt", "改进prompt", "怎么写prompt", "帮我优化这个指令"
 - User pastes a draft prompt and asks for feedback or enhancement
 - User says "I don't know how to prompt for this"
-- User says "how should I use EGC for..."
+- User says "how should I use Codex for..."
 - User explicitly invokes `/prompt-optimize`
 
 ### Do Not Use When
 
 - User wants the task done directly (just execute it)
 - User says "优化代码", "优化性能", "optimize this code", "optimize performance" — these are refactoring tasks, not prompt optimization
-- User is asking about EGC configuration (use `configure-EGC` instead)
+- User is asking about Codex configuration (use `configure-Codex` instead)
 - User wants a skill inventory (use `skill-stocktake` instead)
 - User says "just do it" or "直接做"
 
@@ -59,7 +58,7 @@ Run this 6-phase pipeline sequentially. Present results using the Output Format 
 
 Before analyzing the prompt, detect the current project context:
 
-1. Check if a `Gemini.md` exists in the working directory — read it for project conventions
+1. Check if a `Codex.md` exists in the working directory — read it for project conventions
 2. Detect tech stack from project files:
    - `package.json` → Node.js / TypeScript / React / Next.js
    - `go.mod` → Go
@@ -106,9 +105,9 @@ from the prompt description alone and mark the estimate as uncertain.
 | HIGH    | Cross-domain, 5+ files                       | /plan first, then phased execution         |
 | EPIC    | Multi-session, multi-PR, architectural shift | Use blueprint skill for multi-session plan |
 
-### Phase 3: EGC Component Matching
+### Phase 3: Codex Component Matching
 
-Map intent + scope + tech stack (from Phase 0) to specific EGC components.
+Map intent + scope + tech stack (from Phase 0) to specific Codex components.
 
 #### By Intent Type
 
@@ -175,10 +174,10 @@ For MEDIUM+ tasks, always start with /plan. For EPIC tasks, use blueprint skill.
 
 | Scope       | Recommended Model                             | Rationale                                        |
 | ----------- | --------------------------------------------- | ------------------------------------------------ |
-| TRIVIAL-LOW | gemini-3.5-flash                          | Fast, cost-efficient for simple tasks            |
-| MEDIUM      | gemini-3.5-flash                          | Best coding model for standard work              |
-| HIGH        | gemini-3.5-flash (main) + gemini-3.1-pro-preview (planning) | Pro for architecture, Flash for implementation   |
-| EPIC        | gemini-3.1-pro-preview (blueprint) + gemini-3.5-flash (execution) | Deep reasoning for multi-session planning        |
+| TRIVIAL-LOW | gpt-5.5-flash                          | Fast, cost-efficient for simple tasks            |
+| MEDIUM      | gpt-5.5-flash                          | Best coding model for standard work              |
+| HIGH        | gpt-5.5-flash (main) + gpt-5.5-pro (planning) | Pro for architecture, Flash for implementation   |
+| EPIC        | gpt-5.5-pro (blueprint) + gpt-5.5-flash (execution) | Deep reasoning for multi-session planning        |
 
 **Multi-prompt splitting** (for HIGH/EPIC scope):
 
@@ -209,14 +208,14 @@ as the user's input.
 **Needs Clarification:** Numbered list of questions the user should answer.
 If Phase 0 auto-detected the answer, state it instead of asking.
 
-### Section 2: Recommended EGC Components
+### Section 2: Recommended Codex Components
 
 | Type    | Component     | Purpose                         |
 | ------- | ------------- | ------------------------------- |
 | Command | /plan         | Plan architecture before coding |
 | Skill   | tdd-workflow  | TDD methodology guidance        |
 | Agent   | code-reviewer | Post-implementation review      |
-| Model   | gemini-3.5-flash | Recommended for this scope      |
+| Model   | gpt-5.5-flash | Recommended for this scope      |
 
 ### Section 3: Optimized Prompt — Full Version
 
@@ -235,7 +234,7 @@ For items that reference blueprint, write: "Use the blueprint skill to..."
 
 ### Section 4: Optimized Prompt — Quick Version
 
-A compact version for experienced EGC users. Vary by intent type:
+A compact version for experienced Codex users. Vary by intent type:
 
 | Intent      | Quick Pattern                                                               |
 | ----------- | --------------------------------------------------------------------------- |
@@ -265,10 +264,10 @@ A compact version for experienced EGC users. Vary by intent type:
 
 ### Trigger Examples
 
-- "Optimize this prompt for EGC"
-- "Rewrite this prompt so Gemini CLI uses the right commands"
+- "Optimize this prompt for Codex"
+- "Rewrite this prompt so Codex uses the right commands"
 - "帮我优化这个指令"
-- "How should I prompt EGC for this task?"
+- "How should I prompt Codex for this task?"
 
 ### Example 1: Vague Chinese Prompt (Project Detected)
 
@@ -385,7 +384,7 @@ Each phase = 1 PR, with /verify gates between phases.
 Use /save-session between phases. Use /resume-session to continue.
 Use git worktrees for parallel service extraction when dependencies allow.
 
-Recommended: gemini-3.1-pro-preview for blueprint planning, gemini-3.5-flash for phase execution.
+Recommended: gpt-5.5-pro for blueprint planning, gpt-5.5-flash for phase execution.
 ```
 
 ---
@@ -394,7 +393,7 @@ Recommended: gemini-3.1-pro-preview for blueprint planning, gemini-3.5-flash for
 
 | Component                 | When to Reference                                                       |
 | ------------------------- | ----------------------------------------------------------------------- |
-| `configure-EGC`           | User hasn't set up EGC yet                                              |
+| `configure-Codex`           | User hasn't set up Codex yet                                              |
 | `skill-stocktake`         | Audit which components are installed (use instead of hardcoded catalog) |
 | `search-first`            | Research phase in optimized prompts                                     |
 | `blueprint`               | EPIC-scope optimized prompts (invoke as skill, not command)             |

@@ -3,18 +3,18 @@
 #
 # Fix for #521: Added re-entrancy guard, cooldown throttle, and
 # tail-based sampling to prevent memory explosion from runaway
-# parallel Gemini analysis processes.
+# parallel Codex analysis processes.
 
 set +e
-unset GEMINICODE; unset ANTIGRAVITYCODE
+unset CODEXCODE
 
 SLEEP_PID=""
 USR1_FIRED=0
 ANALYZING=0
 LAST_ANALYSIS_EPOCH=0
 # Minimum seconds between analyses (prevents rapid re-triggering)
-ANALYSIS_COOLDOWN="${EGC_OBSERVER_ANALYSIS_COOLDOWN:-60}"
-IDLE_TIMEOUT_SECONDS="${EGC_OBSERVER_IDLE_TIMEOUT_SECONDS:-1800}"
+ANALYSIS_COOLDOWN="${CODEX_OBSERVER_ANALYSIS_COOLDOWN:-60}"
+IDLE_TIMEOUT_SECONDS="${CODEX_OBSERVER_IDLE_TIMEOUT_SECONDS:-1800}"
 SESSION_LEASE_DIR="${PROJECT_DIR}/.observer-sessions"
 ACTIVITY_FILE="${PROJECT_DIR}/.observer-last-activity"
 
@@ -117,8 +117,8 @@ analyze_observations() {
 
   echo "[$(date)] Analyzing $obs_count observations for project ${PROJECT_NAME}..." >> "$LOG_FILE"
 
-  if [ "${CLV2_IS_WINDOWS:-false}" = "true" ] && [ "${EGC_OBSERVER_ALLOW_WINDOWS:-false}" != "true" ]; then
-    echo "[$(date)] Skipping Codex analysis on Windows in this observer loop. Set EGC_OBSERVER_ALLOW_WINDOWS=true to override." >> "$LOG_FILE"
+  if [ "${CLV2_IS_WINDOWS:-false}" = "true" ] && [ "${CODEX_OBSERVER_ALLOW_WINDOWS:-false}" != "true" ]; then
+    echo "[$(date)] Skipping Codex analysis on Windows in this observer loop. Set CODEX_OBSERVER_ALLOW_WINDOWS=true to override." >> "$LOG_FILE"
     return
   fi
 
@@ -135,20 +135,20 @@ analyze_observations() {
 
   # Sample recent observations instead of loading the entire file (#521).
   # This prevents multi-MB payloads from being passed to the LLM.
-  MAX_ANALYSIS_LINES="${EGC_OBSERVER_MAX_ANALYSIS_LINES:-500}"
+  MAX_ANALYSIS_LINES="${CODEX_OBSERVER_MAX_ANALYSIS_LINES:-500}"
   observer_tmp_dir="${PROJECT_DIR}/.observer-tmp"
   mkdir -p "$observer_tmp_dir"
-  analysis_file="$(mktemp "${observer_tmp_dir}/egc-observer-analysis.XXXXXX.jsonl")"
+  analysis_file="$(mktemp "${observer_tmp_dir}/codex-observer-analysis.XXXXXX.jsonl")"
   tail -n "$MAX_ANALYSIS_LINES" "$OBSERVATIONS_FILE" > "$analysis_file"
   analysis_count=$(wc -l < "$analysis_file" 2>/dev/null || echo 0)
   echo "[$(date)] Using last $analysis_count of $obs_count observations for analysis" >> "$LOG_FILE"
 
   # Use relative path from PROJECT_DIR for cross-platform compatibility (#842).
   # On Windows (Git Bash/MSYS2), absolute paths from mktemp may use MSYS-style
-  # prefixes (e.g. /c/Users/...) that the Gemini subprocess cannot resolve.
+  # prefixes (e.g. /c/Users/...) that the Codex subprocess cannot resolve.
   analysis_relpath=".observer-tmp/$(basename "$analysis_file")"
 
-  prompt_file="$(mktemp "${observer_tmp_dir}/egc-observer-prompt.XXXXXX")"
+  prompt_file="$(mktemp "${observer_tmp_dir}/codex-observer-prompt.XXXXXX")"
   cat > "$prompt_file" <<PROMPT
 IMPORTANT: You are running in non-interactive --print mode. You MUST use the Write tool directly to create files. Do NOT ask for permission, do NOT ask for confirmation, do NOT output summaries instead of writing. Just read, analyze, and write.
 
@@ -191,9 +191,9 @@ Rules:
 - Examples of project patterns: use React functional components, follow Django REST framework conventions
 PROMPT
 
-  # Read the prompt into memory before the Gemini subprocess is spawned.
+  # Read the prompt into memory before the Codex subprocess is spawned.
   # On Windows/MSYS2, the mktemp path can differ from the shell's later path
-  # resolution, so relying on cat "$prompt_file" inside the gemini invocation
+  # resolution, so relying on cat "$prompt_file" inside the codex invocation
   # can fail even though the file was created successfully.
   prompt_content="$(cat "$prompt_file" 2>/dev/null || true)"
   rm -f "$prompt_file"
@@ -203,8 +203,8 @@ PROMPT
     return
   fi
 
-  timeout_seconds="${EGC_OBSERVER_TIMEOUT_SECONDS:-120}"
-  max_turns="${EGC_OBSERVER_MAX_TURNS:-20}"
+  timeout_seconds="${CODEX_OBSERVER_TIMEOUT_SECONDS:-120}"
+  max_turns="${CODEX_OBSERVER_MAX_TURNS:-20}"
   exit_code=0
 
   case "$max_turns" in
@@ -225,7 +225,7 @@ PROMPT
   # Pass prompt via -p flag instead of stdin redirect for Windows compatibility (#842).
   # prompt_content is already loaded in-memory so this no longer depends on the
   # mktemp absolute path continuing to resolve after cwd changes (#1296).
-  CODEX_PLUGIN_SKIP_OBSERVE=1 EGC_SKIP_OBSERVE=1 EGC_HOOK_PROFILE=minimal codex exec \
+  CODEX_PLUGIN_SKIP_OBSERVE=1 CODEX_SKIP_OBSERVE=1 CODEX_HOOK_PROFILE=minimal codex exec \
     --sandbox workspace-write \
     --cd "$PROJECT_DIR" \
     "$prompt_content" >> "$LOG_FILE" 2>&1 &

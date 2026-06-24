@@ -1,14 +1,13 @@
 ---
 name: council
 description: Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing.
-origin: EGC
 ---
 
 # Council
 
 Convene four advisors for ambiguous decisions:
 
-- the in-context Gemini voice
+- the in-context Codex voice
 - a Skeptic subagent
 - a Pragmatist subagent
 - a Critic subagent
@@ -164,7 +163,7 @@ Keep it scannable on a phone screen.
 
 ## Persistence Rule
 
-Do **not** write ad-hoc notes to `~/.gemini/notes` or other shadow paths from this skill.
+Do **not** write ad-hoc notes to `~/.codex/notes` or other shadow paths from this skill.
 
 If the council materially changes the recommendation:
 
@@ -204,7 +203,7 @@ If the user wants another round:
 Question:
 
 ```text
-Should we ship EGC 2.0 as alpha now, or hold until the control-plane UI is more complete?
+Should we ship Codex 2.0 as alpha now, or hold until the control-plane UI is more complete?
 ```
 
 Likely council shape:

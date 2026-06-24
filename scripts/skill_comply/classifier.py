@@ -10,6 +10,7 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 from scripts.skill_comply.parser import ComplianceSpec, ObservationEvent
+from scripts.skill_comply.codex_cli import codex_exec_command
 
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "agents"
 
@@ -44,7 +45,7 @@ def classify_events(
     )
 
     result = subprocess.run(
-        ["gemini", "-p", prompt, "--model", model, "--output-format", "text"],
+        codex_exec_command(prompt, model),
         capture_output=True,
         text=True,
         timeout=60,

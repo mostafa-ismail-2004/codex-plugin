@@ -1,7 +1,6 @@
 ---
 name: design-system
 description: Use this skill to generate or audit design systems, check visual consistency, and review PRs that touch styling.
-origin: EGC
 ---
 
 # Design System — Generate & Audit Visual Systems

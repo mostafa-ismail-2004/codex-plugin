@@ -1,12 +1,12 @@
 ---
 name: skill-comply-spec-generator
 description: Extracts observable behavioral sequences from natural language skill definitions.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 <!-- markdownlint-disable MD007 -->
 
-You are analyzing a skill/rule file for a coding agent (Gemini CLI).
+You are analyzing a skill/rule file for a coding agent (Codex).
 Your task: extract the **observable behavioral sequence** that an agent should follow when this skill is active.
 
 Each step should be described in natural language. Do NOT use regex patterns.

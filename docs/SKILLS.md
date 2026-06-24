@@ -6,20 +6,20 @@ This document provides a comprehensive list of skills available in the `codex-pl
 |-------|-------------|
 | **agent-harness-construction** | Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates. |
 | **agent-introspection-debugging** | Structured self-debugging workflow for AI agent failures using capture, diagnosis, contained recovery, and introspection reports. |
-| **agent-sort** | Build an evidence-backed EGC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets. |
+| **agent-sort** | Build an evidence-backed Codex install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets. |
 | **agentic-engineering** | Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing. |
 | **ai-first-engineering** | Engineering operating model for teams where AI agents generate a large share of implementation output. |
 | **ai-regression-testing** | Regression testing strategies for AI-assisted development, sandbox-mode API testing, and patterns to catch AI blind spots. |
 | **api-design** | REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting. |
-| **architecture-decision-records** | Capture architectural decisions made during Gemini CLI sessions as structured ADRs. |
+| **architecture-decision-records** | Capture architectural decisions made during Codex sessions as structured ADRs. |
 | **automation-audit-ops** | Evidence-first automation inventory and overlap audit workflow. |
 | **blueprint** | Implementation blueprints and architectural patterns for complex features. |
 | **browser-qa** | Automate visual testing and UI interaction verification using browser automation. |
-| **code-commenter** | Guides Gemini CLI in writing high-quality, language-agnostic code comments and documentation. |
+| **code-commenter** | Guides Codex in writing high-quality, language-agnostic code comments and documentation. |
 | **code-tour** | Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. |
 | **codebase-onboarding** | Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map and key conventions. |
 | **coding-standards** | Baseline cross-project coding conventions for naming, readability, and immutability. |
-| **context-budget** | Audits Gemini CLI context window consumption across agents, skills, MCP servers, and rules. |
+| **context-budget** | Audits Codex context window consumption across agents, skills, MCP servers, and rules. |
 | **continuous-agent-loop** | Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls. |
 | **continuous-learning** | Instinct-based learning system that observes sessions, creates atomic instincts, and evolves them into skills. |
 | **council** | Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. |
@@ -55,5 +55,5 @@ This document provides a comprehensive list of skills available in the `codex-pl
 | **team-builder** | Interactive agent picker for composing and dispatching parallel teams. |
 | **terminal-ops** | Evidence-first repo execution workflow for command execution and verification. |
 | **ui-ux-architect** | Architectural patterns for user interfaces, accessibility, and user experience design. |
-| **verification-loop** | A comprehensive verification system for Gemini CLI sessions to ensure correctness. |
-| **workspace-surface-audit** | Audit active repo and tools to recommend the highest-value EGC-native skills and workflows. |
+| **verification-loop** | A comprehensive verification system for Codex sessions to ensure correctness. |
+| **workspace-surface-audit** | Audit active repo and tools to recommend the highest-value Codex-native skills and workflows. |

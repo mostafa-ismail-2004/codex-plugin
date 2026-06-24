@@ -3,13 +3,13 @@
 # Runs on PreToolUse to suggest manual compaction at logical intervals
 
 # Use Codex session identifiers when present, or fallback to PPID.
-SESSION_ID="${CODEX_SESSION_ID:-${ANTIGRAVITY_SESSION_ID:-${PPID:-default}}}"
+SESSION_ID="${CODEX_SESSION_ID:-${PPID:-default}}"
 # Use a hidden directory for temp files to keep it clean
 TEMP_DIR="/tmp/.codex-plugin-compact"
 mkdir -p "$TEMP_DIR"
 COUNTER_FILE="${TEMP_DIR}/count-${SESSION_ID}"
 # Use the environment variable injected from plugin settings
-THRESHOLD=${CODEX_PLUGIN_COMPACT_THRESHOLD:-${ANTIGRAVITY_COMPACT_THRESHOLD:-50}}
+THRESHOLD=${CODEX_PLUGIN_COMPACT_THRESHOLD:-50}
 
 # Initialize or increment counter
 if [ -f "$COUNTER_FILE" ]; then

@@ -1,7 +1,6 @@
 ---
 name: product-lens
 description: Use this skill to validate the "why" before building, run product diagnostics, and pressure-test product direction before the request becomes an implementation contract.
-origin: EGC
 ---
 
 # Product Lens — Think Before You Build
@@ -43,7 +42,7 @@ If the result is "yes, build this," the next lane is `product-capability`, not m
 Reviews your current project through a founder lens:
 
 ```
-1. Read README, GEMINI.md, package.json, recent commits
+1. Read README, CODEX.md, package.json, recent commits
 2. Infer: what is this trying to be?
 3. Score: product-market fit signals (0-10)
    - Usage growth trajectory

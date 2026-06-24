@@ -1,6 +1,6 @@
 ---
 name: code-commenter
-description: Guides Gemini CLI in writing high-quality, language-agnostic code comments and documentation. Use when asked to comment code, document functions, or improve code readability by explaining technical intent and rationale.
+description: Guides Codex in writing high-quality, language-agnostic code comments and documentation. Use when asked to comment code, document functions, or improve code readability by explaining technical intent and rationale.
 ---
 
 # Code Commenting Guidelines

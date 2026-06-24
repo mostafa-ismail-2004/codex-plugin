@@ -1,7 +1,6 @@
 ---
 name: search-first
 description: Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.
-origin: EGC
 ---
 
 # /search-first — Research Before You Code
@@ -64,8 +63,8 @@ Before writing a utility or adding functionality, mentally run through:
 
 0. Does this already exist in the repo? → `rg` through relevant modules/tests first
 1. Is this a common problem? → Search npm/PyPI
-2. Is there an MCP for this? → Check `~/.gemini/settings.json` and search
-3. Is there a skill for this? → Check `~/.gemini/skills/`
+2. Is there an MCP for this? → Check `~/.codex/settings.json` and search
+3. Is there a skill for this? → Check `~/.codex/skills/`
 4. Is there a GitHub implementation/template? → Run GitHub code search for maintained OSS before writing net-new code
 
 ### Full Mode (agent)
@@ -78,7 +77,7 @@ Task(subagent_type="general-purpose", prompt="
   Language/framework: [LANG]
   Constraints: [ANY]
 
-  Search: npm/PyPI, MCP servers, Gemini CLI skills, GitHub
+  Search: npm/PyPI, MCP servers, Codex skills, GitHub
   Return: Structured comparison with recommendation
 ")
 ```
@@ -94,7 +93,7 @@ Task(subagent_type="general-purpose", prompt="
 
 ### AI/LLM Integration
 
-- Gemini SDK → Context7 for latest docs
+- Codex SDK → Context7 for latest docs
 - Prompt management → Check MCP servers
 - Document processing → `unstructured`, `pdfplumber`, `mammoth`
 

@@ -1,7 +1,6 @@
 ---
 name: gateguard
 description: Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measurably improves output quality by +2.25 points vs ungated agents.
-origin: EGC
 ---
 
 # GateGuard — Fact-Forcing Pre-Action Gate
@@ -90,13 +89,13 @@ Triggers on: `rm -rf`, `git reset --hard`, `git push --force`, `drop table`, etc
 
 ## Quick Start
 
-### Option A: Use the EGC hook (zero install)
+### Option A: Use the Codex hook (zero install)
 
 The hook at `scripts/hooks/gateguard-fact-force.js` is included in this plugin. Enable it via hooks.json.
 
 If GateGuard blocks setup or repair work, start the session with
-`EGC_GATEGUARD=off`. For hook-level control, keep using
-`EGC_DISABLED_HOOKS` with the GateGuard hook ID.
+`CODEX_GATEGUARD=off`. For hook-level control, keep using
+`CODEX_DISABLED_HOOKS` with the GateGuard hook ID.
 
 ### Option B: Full package with config
 

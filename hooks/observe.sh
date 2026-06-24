@@ -126,39 +126,39 @@ if [ -n "${CLV2_CONFIG:-}" ] && [ -f "$(dirname "$CLV2_CONFIG")/disabled" ]; the
 fi
 
 # Prevent observe.sh from firing on non-human sessions to avoid:
-#   - EGC observing its own observer sessions (self-loop)
-#   - EGC observing other tools' automated sessions
+#   - Codex observing its own observer sessions (self-loop)
+#   - Codex observing other tools' automated sessions
 #   - automated sessions creating project-scoped continuous-learning metadata
 
 # Layer 1: entrypoint. Only interactive terminal sessions should continue.
 # sdk-ts: Agent SDK sessions can be human-interactive (e.g. via Happy).
 # Non-interactive SDK automation is still filtered by Layers 2-5 below
-# (EGC_HOOK_PROFILE=minimal, EGC_SKIP_OBSERVE=1, agent_id, path exclusions).
+# (CODEX_HOOK_PROFILE=minimal, CODEX_SKIP_OBSERVE=1, agent_id, path exclusions).
 case "${CODEX_ENTRYPOINT:-cli}" in
   cli|sdk-ts|codex-app|codex-cli|codex-ide) ;;
   *) exit 0 ;;
 esac
 
 # Check if observer is enabled via environment variable.
-if [ "$(echo "${CODEX_PLUGIN_OBSERVER_ENABLED:-${ANTIGRAVITY_LEARNING_OBSERVER_ENABLED:-false}}" | tr '[:upper:]' '[:lower:]')" != "true" ]; then
+if [ "$(echo "${CODEX_PLUGIN_OBSERVER_ENABLED:-false}" | tr '[:upper:]' '[:lower:]')" != "true" ]; then
   exit 0
 fi
 
 # Layer 2: minimal hook profile suppresses non-essential hooks.
-[ "${EGC_HOOK_PROFILE:-standard}" = "minimal" ] && exit 0
+[ "${CODEX_HOOK_PROFILE:-standard}" = "minimal" ] && exit 0
 
 # Layer 3: cooperative skip env var for automated sessions.
-[ "${CODEX_PLUGIN_SKIP_OBSERVE:-${EGC_SKIP_OBSERVE:-0}}" = "1" ] && exit 0
+[ "${CODEX_PLUGIN_SKIP_OBSERVE:-${CODEX_SKIP_OBSERVE:-0}}" = "1" ] && exit 0
 
 # Layer 4: subagent sessions are automated by definition.
-_EGC_AGENT_ID=$(echo "$INPUT_JSON" | "$PYTHON_CMD" -c "import json,sys; data=json.load(sys.stdin); print(data.get('agent_id', data.get('subagent_id', '')))" 2>/dev/null || true)
-[ -n "$_EGC_AGENT_ID" ] && exit 0
+_CODEX_AGENT_ID=$(echo "$INPUT_JSON" | "$PYTHON_CMD" -c "import json,sys; data=json.load(sys.stdin); print(data.get('agent_id', data.get('subagent_id', '')))" 2>/dev/null || true)
+[ -n "$_CODEX_AGENT_ID" ] && exit 0
 
 # Layer 5: known observer-session path exclusions.
-_EGC_SKIP_PATHS="${CODEX_PLUGIN_OBSERVE_SKIP_PATHS:-${EGC_OBSERVE_SKIP_PATHS:-observer-sessions,.codex-mem,.antigravity-mem}}"
+_CODEX_SKIP_PATHS="${CODEX_PLUGIN_OBSERVE_SKIP_PATHS:-observer-sessions,.codex-mem}"
 if [ -n "$STDIN_CWD" ]; then
-  IFS=',' read -ra _EGC_SKIP_ARRAY <<< "$_EGC_SKIP_PATHS"
-  for _pattern in "${_EGC_SKIP_ARRAY[@]}"; do
+  IFS=',' read -ra _CODEX_SKIP_ARRAY <<< "$_CODEX_SKIP_PATHS"
+  for _pattern in "${_CODEX_SKIP_ARRAY[@]}"; do
     _pattern="${_pattern#"${_pattern%%[![:space:]]*}"}"
     _pattern="${_pattern%"${_pattern##*[![:space:]]}"}"
     [ -z "$_pattern" ] && continue
@@ -345,7 +345,7 @@ _CHECK_OBSERVER_RUNNING() {
   return 1  # No PID file or process dead
 }
 
-if [ "$(echo "${CODEX_PLUGIN_OBSERVER_ENABLED:-${ANTIGRAVITY_LEARNING_OBSERVER_ENABLED:-false}}" | tr '[:upper:]' '[:lower:]')" = "true" ]; then
+if [ "$(echo "${CODEX_PLUGIN_OBSERVER_ENABLED:-false}" | tr '[:upper:]' '[:lower:]')" = "true" ]; then
   OBSERVER_ENABLED=true
 else
   OBSERVER_ENABLED=false
@@ -402,8 +402,8 @@ fi
 
 # Throttle SIGUSR1: only signal observer every N observations (#521)
 # This prevents rapid signaling when tool calls fire every second,
-# which caused runaway parallel Gemini analysis processes.
-SIGNAL_EVERY_N="${EGC_OBSERVER_SIGNAL_EVERY_N:-20}"
+# which caused runaway parallel Codex analysis processes.
+SIGNAL_EVERY_N="${CODEX_OBSERVER_SIGNAL_EVERY_N:-20}"
 SIGNAL_COUNTER_FILE="${PROJECT_DIR}/.observer-signal-counter"
 ACTIVITY_FILE="${PROJECT_DIR}/.observer-last-activity"
 

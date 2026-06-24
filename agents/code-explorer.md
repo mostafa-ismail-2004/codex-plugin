@@ -1,7 +1,7 @@
 ---
 name: code-explorer
 description: Deeply analyzes existing codebase features by tracing execution paths, mapping architecture layers, and documenting dependencies to inform new development.
-model: gemini-3.5-flash
+model: gpt-5.5-flash
 ---
 
 # Code Explorer Agent

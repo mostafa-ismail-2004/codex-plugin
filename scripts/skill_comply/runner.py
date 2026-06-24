@@ -1,4 +1,4 @@
-"""Run scenarios via gemini -p and parse tool calls from stream-json output."""
+"""Run scenarios via codex exec and parse tool calls from JSONL output."""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ from pathlib import Path
 
 from scripts.skill_comply.parser import ObservationEvent
 from scripts.skill_comply.scenario_generator import Scenario
+from scripts.skill_comply.codex_cli import codex_exec_command
 
 SANDBOX_BASE = Path("/tmp/skill-comply-sandbox")
 ALLOWED_MODELS = frozenset({"flash", "pro", "flash-8b", "inherit"})
@@ -30,7 +31,7 @@ def run_scenario(
     max_turns: int = 30,
     timeout: int = 300,
 ) -> ScenarioRun:
-    """Execute a scenario and extract tool calls from stream-json output."""
+    """Execute a scenario and extract tool calls from Codex JSONL output."""
     if model not in ALLOWED_MODELS:
         raise ValueError(f"Unknown model: {model!r}. Allowed: {ALLOWED_MODELS}")
 
@@ -38,15 +39,12 @@ def run_scenario(
     _setup_sandbox(sandbox_dir, scenario)
 
     result = subprocess.run(
-        [
-            "gemini", "-p", scenario.prompt,
-            "--model", model,
-            "--max-turns", str(max_turns),
-            "--add-dir", str(sandbox_dir),
-            "--allowedTools", "Read,Write,Edit,Bash,Glob,Grep",
-            "--output-format", "stream-json",
-            "--verbose",
-        ],
+        codex_exec_command(
+            scenario.prompt,
+            model,
+            json_output=True,
+            extra_args=["--add-dir", str(sandbox_dir)],
+        ),
         capture_output=True,
         text=True,
         timeout=timeout,
@@ -55,7 +53,7 @@ def run_scenario(
 
     if result.returncode != 0:
         raise RuntimeError(
-            f"gemini -p failed (rc={result.returncode}): {result.stderr[:500]}"
+            f"codex exec failed (rc={result.returncode}): {result.stderr[:500]}"
         )
 
     observations = _parse_stream_json(result.stdout)
@@ -90,7 +88,7 @@ def _setup_sandbox(sandbox_dir: Path, scenario: Scenario) -> None:
 
 
 def _parse_stream_json(stdout: str) -> list[ObservationEvent]:
-    """Parse gemini -p stream-json output into ObservationEvents.
+    """Parse codex exec JSONL output into ObservationEvents.
 
     Stream-json format:
     - type=assistant with content[].type=tool_use → tool call (name, input)

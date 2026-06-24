@@ -1,7 +1,6 @@
 ---
 name: strategic-compact
 description: Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction.
-origin: EGC
 ---
 
 # Strategic Compact Skill
@@ -94,9 +93,9 @@ Understanding what persists helps you compact with confidence:
 
 | Persists                           | Lost                                     |
 | ---------------------------------- | ---------------------------------------- |
-| GEMINI.md instructions             | Intermediate reasoning and analysis      |
+| CODEX.md instructions             | Intermediate reasoning and analysis      |
 | TodoWrite task list                | File contents you previously read        |
-| Memory files (`~/.gemini/memory/`) | Multi-step conversation context          |
+| Memory files (`~/.codex/memory/`) | Multi-step conversation context          |
 | Git state (commits, branches)      | Tool call history and counts             |
 | Files on disk                      | Nuanced user preferences stated verbally |
 
@@ -125,7 +124,7 @@ Instead of loading full skill content at session start, use a trigger table that
 
 Monitor what's consuming your context window:
 
-- **GEMINI.md files** — Always loaded, keep lean
+- **CODEX.md files** — Always loaded, keep lean
 - **Loaded skills** — Each skill adds 1-5K tokens
 - **Conversation history** — Grows with each exchange
 - **Tool results** — File reads, search results add bulk
@@ -134,8 +133,8 @@ Monitor what's consuming your context window:
 
 Common sources of duplicate context:
 
-- Same rules in both `~/.gemini/rules/` and project `.gemini/rules/`
-- Skills that repeat GEMINI.md instructions
+- Same rules in both `~/.codex/rules/` and project `.codex/rules/`
+- Skills that repeat CODEX.md instructions
 - Multiple skills covering overlapping domains
 
 ### Context Optimization Tools
