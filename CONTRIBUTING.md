@@ -1,7 +1,7 @@
 # Contributing to Codex Plugin
 
 Thanks for helping improve Codex Plugin. This project packages reusable Codex
-skills, persona prompts, hooks, MCP configuration, and utility scripts.
+skills, persona prompts, hooks, and utility scripts.
 
 ## Adding a New Persona
 

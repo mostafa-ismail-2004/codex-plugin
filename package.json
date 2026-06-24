@@ -1,7 +1,7 @@
 {
   "name": "codex-plugin",
   "version": "2.1.0",
-  "description": "Agentic development toolkit for Codex with skills, expert personas, hooks, and MCP configuration.",
+  "description": "Agentic development toolkit for Codex with skills, expert personas, and hooks.",
   "type": "module",
   "scripts": {
     "validate": "python3 scripts/validate-plugin.py .",

@@ -2,7 +2,7 @@
 
 Codex Plugin is a Codex-native migration of `everything-agy`: a broad agentic
 development toolkit with reusable skills, expert persona prompts, lifecycle
-hooks, MCP configuration, and utility scripts for deeper coding workflows.
+hooks, and utility scripts for deeper coding workflows.
 
 The original `everything-agy` project is preserved separately. This repository
 keeps the content, but restructures the runtime-facing pieces for Codex.
@@ -12,7 +12,6 @@ keeps the content, but restructures the runtime-facing pieces for Codex.
 - **Skills:** 50+ reusable `SKILL.md` workflows under `skills/`.
 - **Expert personas:** migrated persona prompts under `agents/`.
 - **Hooks:** Codex lifecycle hook configuration under `hooks/hooks.json`.
-- **MCP config:** Codex-compatible GitHub MCP config in `.mcp.json`.
 - **Utilities:** observer, skill compliance, project detection, and support
   scripts under `scripts/`.
 - **Legacy references:** original Antigravity manifests under
@@ -23,7 +22,6 @@ keeps the content, but restructures the runtime-facing pieces for Codex.
 ```text
 codex-plugin/
 ├── .codex-plugin/plugin.json   # Codex plugin manifest
-├── .mcp.json                   # Plugin-bundled MCP server config
 ├── hooks/hooks.json            # Plugin-bundled lifecycle hooks
 ├── skills/                     # Codex Agent Skills
 ├── agents/                     # Expert persona prompts
@@ -48,17 +46,6 @@ Validate the package before installing:
 ```bash
 npm run validate
 ```
-
-## GitHub MCP
-
-The bundled GitHub MCP config expects:
-
-```bash
-export GITHUB_PERSONAL_ACCESS_TOKEN=...
-```
-
-If you already use the ChatGPT/Codex GitHub connector, you may not need this MCP
-server. Keep MCP enabled only when you specifically want local MCP behavior.
 
 ## Hooks
 
@@ -117,11 +104,10 @@ python3 scripts/skill_comply/run.py skills/search-first/SKILL.md
 This repo was migrated from `everything-agy` with these Codex-specific changes:
 
 - Antigravity `plugin.json` moved to `docs/legacy-antigravity/plugin.json`.
-- Antigravity `mcp_config.json` moved to
-  `docs/legacy-antigravity/mcp_config.json`.
+- Antigravity MCP config removed; this Codex plugin does not bundle MCP
+  servers.
 - Antigravity `hooks.json` moved to `docs/legacy-antigravity/hooks.json`.
 - Codex plugin manifest created at `.codex-plugin/plugin.json`.
-- Codex MCP config created at `.mcp.json`.
 - Codex hook config created at `hooks/hooks.json`.
 - Runtime observer/config paths moved from the legacy Antigravity storage
   location to `~/.codex/codex-plugin`.

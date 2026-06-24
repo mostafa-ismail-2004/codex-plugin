@@ -1,7 +1,7 @@
 {
   "name": "codex-plugin",
   "version": "2.1.0",
-  "description": "Agentic development toolkit for Codex with skills, expert personas, hooks, and MCP configuration.",
+  "description": "Agentic development toolkit for Codex with skills, expert personas, and hooks.",
   "author": {
     "name": "Mostafa Ismail",
     "url": "https://github.com/mostafa-ismail-2004"
@@ -13,14 +13,13 @@
     "skills",
     "agents",
     "hooks",
-    "mcp",
     "developer-tools"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Codex Plugin",
     "shortDescription": "A broad Codex toolkit for agentic engineering workflows.",
-    "longDescription": "Codex Plugin migrates Everything Antigravity into a Codex-native plugin package with reusable skills, expert persona prompts, lifecycle hooks, MCP configuration, and development utilities.",
+    "longDescription": "Codex Plugin migrates Everything Antigravity into a Codex-native plugin package with reusable skills, expert persona prompts, lifecycle hooks, and development utilities.",
     "developerName": "Mostafa Ismail",
     "category": "Productivity",
     "capabilities": [
@@ -33,6 +32,5 @@
       "Use Codex Plugin to plan an implementation.",
       "Use Codex Plugin to pick useful skills for this repo."
     ]
-  },
-  "mcpServers": "./.mcp.json"
+  }
 }
